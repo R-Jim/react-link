@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
 import BasicExample from './BasicExample';
+import configureStore from './stores/Store';
+import { Provider } from 'react-redux';
+
+const store = configureStore();
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
+      <Provider store={store}>
         <BasicExample />
-      </div>
+      </Provider>
     );
   }
 }
