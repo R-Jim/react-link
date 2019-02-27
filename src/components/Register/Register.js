@@ -28,7 +28,7 @@ class Register extends React.Component {
       clearInterval(this.state.intervalId);
     }
   }
-  ///afdsafdsaf
+  ///edited the comment
   render() {
     const count = this.state.count;
     if (count == 0)
