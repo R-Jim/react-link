@@ -4,7 +4,7 @@ import BasicExample from './BasicExample';
 import configureStore from './stores';
 import { Provider } from 'react-redux';
 
-const store = configureStore();
+const { store } = configureStore();
 
 class App extends React.Component {
   render() {
