@@ -5,9 +5,21 @@ class Home extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedIn: false
+      loggedIn: false,
+      username: false,
     }
   }
+
+
+  static getDerivedStateFromProps(props, state) {
+    const loggedIn = props.loggedIn;
+    const locationState = props.location.state;
+    if (loggedIn && locationState) {
+      return { ...state, loggedIn: true, username: locationState.username }
+    }
+    return state;
+  }
+
 
   handleLoggin = () => {
     this.setState({
@@ -22,12 +34,6 @@ class Home extends React.Component {
   }
 
   render() {
-    // console.log(this.props.location);
-    const state = this.props.location.state;
-    if (state && !this.state.loggedIn && state.loggedIn) {
-      this.handleLoggin();
-      state.loggedIn = false;
-    }
     return (
       <div>
         <h1>Home cc</h1>
@@ -36,7 +42,8 @@ class Home extends React.Component {
           {/* <li><Link to="/about">About</Link></li>
           <li><Link to="/topics">Topics</Link></li> */}
         </ul>
-        {(!this.state.loggedIn) ? <p> <Link to="/login">Login</Link></p> : <p onClick={this.handleLoggout}>Logout</p>}
+        {/* {(!this.state.loggedIn) ? <p> <Link to="/login">Login</Link></p> : <p onClick={this.handleLoggout}>Logout</p>} */}
+        <p> <Link to="/login">Login</Link></p>
       </div>
     )
   }
