@@ -8,6 +8,7 @@ const mapStateToProps = (state) => {
     username: login.username,
     password: login.password,
     loggedIn: login.loggedIn,
+    exist: login.exist,
   }
 }
 

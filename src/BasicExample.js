@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Home from './containers/Home'
 import Login from './containers/Login'
-import Register from './components/Register'
+import Register from './containers/Register'
 import {
   BrowserRouter as Router,
   Route,
