@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Home from './components/Home'
-import Login from './components/Login'
+import Home from './containers/Home'
+import Login from './containers/Login'
 import Register from './components/Register'
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link, Switch
 } from 'react-router-dom'
 
 // const Home = () => (
@@ -66,13 +66,13 @@ Topics.propTypes = {
 
 const BasicExample = () => (
   <Router>
-    <div>
+    <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/about" component={About} />
       <Route path="/topics" component={Topics} />
-    </div>
+    </Switch>
   </Router>
 )
 export default BasicExample;
