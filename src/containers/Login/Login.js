@@ -1,15 +1,12 @@
 import { connect } from 'react-redux'
 import Login from '../../components/Login'
 import * as LoginReducer from '../../reducers/Login'
-import { withRouter } from 'react-router-dom'
 
 const mapStateToProps = (state) => {
   const login = state.login;
   return {
     username: login.username,
     password: login.password,
-    // admin: login.admin,
-    requestLogin: login.requestLogin,
     loggedIn: login.loggedIn,
   }
 }
@@ -25,4 +22,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

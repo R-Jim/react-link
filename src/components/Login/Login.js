@@ -5,7 +5,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      errMsg: ''
+      errMsg: '',
+      timeLoggedIn: 0,
     }
   }
 
@@ -27,32 +28,28 @@ class Login extends React.Component {
   }
 
   submitForm = (e) => {
-    const username = this.props.username;
-    const password = this.props.password;
-    const login = this.props.login;
+    const { username, password, login } = this.props;
+    const timeLoggedIn = this.state.timeLoggedIn + 1;
+    this.setState({ timeLoggedIn })
     login(username, password);
     e.preventDefault();
   }
 
   static getDerivedStateFromProps(props, state) {
-    const loggedIn = props.loggedIn;
-    const requestLogin = props.requestLogin;
+    const { loggedIn } = props;
     let errMsg = ''
-    if (!loggedIn && requestLogin) {
+    if (!loggedIn && state.timeLoggedIn > 0) {
       errMsg = 'Wrong username or password';
     }
     return { ...state, errMsg: errMsg }
   }
 
   render() {
-    const username = this.props.username;
-    const password = this.props.password;
-    const loggedIn = this.props.loggedIn;
-    const requestLogin = this.props.requestLogin;
-    console.log(this.props);
-    if (loggedIn && requestLogin) {
+    const { username, password, loggedIn } = this.props;
+
+    if (loggedIn) {
       return (
-        <Redirect exact to={{ pathname: '/', state: { username: username } }} />
+        <Redirect exact to={{ pathname: '/' }} />
       );
     }
     return (
