@@ -1,11 +1,16 @@
 const UPDATE_FORM_VALUE = "login/UPDATE_FORM_VALUE";
+const REGISTER_ACCOUNT = "login/REGISTER_ACCOUNT";
+const CHECK_EXIST = "login/CHECK_EXIST";
 const LOGIN = "login/LOGIN";
 
 const initialState = {
   username: '',
   password: '',
-  admin: { username: 'admin', password: 'admin' },
+  accounts: [
+    { username: 'admin', password: 'admin' }
+  ],
   loggedIn: false,
+  exist: false,
 }
 
 export const updateFormValue = (fieldName, value) => {
@@ -28,6 +33,28 @@ export const login = (username, password) => {
   }
 }
 
+export const register = (username, password, email, fullname, dob) => {
+  return {
+    type: REGISTER_ACCOUNT,
+    payload: {
+      username,
+      password,
+      email,
+      fullname,
+      dob,
+    }
+  }
+}
+
+export const checkExist = (username) => {
+  return {
+    type: CHECK_EXIST,
+    payload: {
+      username
+    }
+  }
+}
+
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORM_VALUE: {
@@ -41,11 +68,30 @@ const loginReducer = (state = initialState, action) => {
     case LOGIN: {
       const { payload } = action;
       const { username, password } = payload;
-      const { admin } = state;
-      const loggedIn = admin.username == username && admin.password == password;
+      const { accounts } = state;
+      const loggedIn = accounts.some((account) => account.username == username && account.password == password);
       return {
         ...state,
         loggedIn,
+      }
+    }
+    case REGISTER_ACCOUNT: {
+      const { payload } = action;
+      const { username, password, email, fullname, dob } = payload;
+      const accounts = [...state.accounts].concat({ username, password, email, fullname, dob });
+      return {
+        ...state,
+        accounts
+      }
+    }
+    case CHECK_EXIST: {
+      const { payload } = action;
+      const { username } = payload;
+      const { accounts } = state;
+      const exist = accounts.some((account) => account.username == username);
+      return {
+        ...state,
+        exist,
       }
     }
     default: return state;
