@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom';
+import { LoginWrapper, FormInput } from './styles';
 
 class Login extends React.Component {
   constructor(props) {
@@ -53,17 +54,19 @@ class Login extends React.Component {
       );
     }
     return (
-      <div>
+      <LoginWrapper>
         <span style={{ "color": "red" }}>{this.state.errMsg}</span>
         <h1>Login</h1>
         <form onSubmit={this.submitForm}>
           <div>Username:</div>
-          <input
+          <FormInput
+            error={!!this.state.errMsg}
             value={username}
             onChange={this.handleUsernameInput}
           />
           <div>Password:</div>
-          <input
+          <FormInput
+            error={!!this.state.errMsg}
             type="password"
             value={password}
             onChange={this.handlePasswordInput}
@@ -74,7 +77,7 @@ class Login extends React.Component {
         </button>
         </form>
         <p><Link to="/register">Register</Link></p>
-      </div >
+      </LoginWrapper>
     )
   }
 }
