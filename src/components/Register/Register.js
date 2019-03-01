@@ -1,5 +1,7 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
+import { RegisterButton, PRIMARY, DISABLED } from './styles'
+import { Button, HyperLink, Title, InputStyled } from '../styles';
 
 class Register extends React.Component {
 
@@ -70,30 +72,30 @@ class Register extends React.Component {
   render() {
     const { username, password, email, fullname, dob, registered, exist } = this.props;
     const { validate } = this.state;
-    console.log(exist + "," + validate);
     if (registered)
       return <Redirect exact to={{ pathname: '/login', state: { username, password } }} />
     return (
       <div>
         <h1>Create new account</h1>
         <form onSubmit={this.handleSubmitForm}>
-          <span style={{ color: "red" }}>{(exist) ? 'Username already exist' : ''}</span>
+          <Title style={{ color: "red" }}>{(exist) ? 'Username already exist' : ''}</Title>
           <div>
-            Username:
+            <Title>Username:</Title>
           </div>
-          <input
+          <InputStyled
             type="text"
             value={username}
             pattern="[A-Za-z1-9_]{0,}"
             onChange={this.handleInputUsername}
             title="Username can only have A-Z, a-z, 1-9 or _"
+            error={exist}
             required
           />
-          <button type="button" onClick={this.handleCheckUsername}>Check</button>
+          <RegisterButton type="button" onClick={this.handleCheckUsername}>Check</RegisterButton>
           <div>
-            Password:
+            <Title>Password:</Title>
           </div>
-          <input
+          <InputStyled
             type="password"
             value={password}
             onChange={this.handleInputPassword}
@@ -102,34 +104,35 @@ class Register extends React.Component {
             title="Password must have at lease 8 characters"
           />
           <div>
-            Email:
+            <Title>Email:</Title>
           </div>
-          <input
+          <InputStyled
             type="text"
             value={email}
             onChange={this.handleInputEmail}
             required
           />
           <div>
-            Fullname:
+            <Title>Fullname:</Title>
           </div>
-          <input
+          <InputStyled
             type="text"
             value={fullname}
             onChange={this.handleInputFullname}
           />
           <div>
-            Date of birth:
+            <Title>Date of birth:</Title>
           </div>
-          <input
+          <InputStyled
             type="text"
             value={dob}
             onChange={this.handleInputDob}
           />
           <br />
-          <button type="submit" disabled={!validate}>
+          <HyperLink><Link exact to="/login">Back</Link></HyperLink>
+          <RegisterButton buttonType={(validate) ? PRIMARY : DISABLED} type="submit" disabled={!validate}>
             Register
-          </button>
+          </RegisterButton>
         </form>
       </div >
     )
