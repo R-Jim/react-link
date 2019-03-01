@@ -17,3 +17,13 @@ export const FormInput = styled(InputStyled)`
     return 'blueviolet';
   }}; */
 `;
+
+export const IconStyled = styled.img`
+    margin: 0 38.5%;
+    width: 25%;
+`;
+
+export const PStyled = styled.p`
+    color:gray;
+    text-align:center;
+`;

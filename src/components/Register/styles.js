@@ -12,23 +12,14 @@ export const PRIMARY = {
   border: "darkcyan",
 };
 export const DISABLED = {
-  bg: "gray",
+  bg: "#444444",
   color: "white",
-  border: "gray",
+  border: "darkgray",
 };
 
 export const RegisterButton = styled(Button)`
   background: ${props => props.buttonType.bg};
   color: ${props => props.buttonType.color};
-    font-size: 1em;
-    margin: 1em 0.5em;
-    padding: 0.25em 1em;
-    border:  2px solid ${props => props.buttonType.border};
-    border-radius:3px;
-
-    :disabled{
-      background: "gray" ;
-    }
 `;
 
 RegisterButton.defaultProps = {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect, Link } from 'react-router-dom'
 import { RegisterButton, PRIMARY, DISABLED } from './styles'
-import { Button, HyperLink, Title, InputStyled } from '../styles';
+import { Button, HyperLink, Title, InputStyled, HeaderStyled } from '../styles';
 
 class Register extends React.Component {
 
@@ -46,8 +46,7 @@ class Register extends React.Component {
   }
 
   handleSubmitForm = (e) => {
-    const { username, password, email, fullname, dob, register } = this.props;
-    register(username, password, email, fullname, dob);
+    this.handleCheckUsername();
     e.preventDefault();
   }
 
@@ -63,8 +62,13 @@ class Register extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     const { exist } = props;
+    const { validate } = state;
     if (exist) {
       return { ...state, validate: !exist }
+    }
+    if (validate) {
+      const { username, password, email, fullname, dob, register } = props;
+      register(username, password, email, fullname, dob);
     }
     return state
   }
@@ -76,7 +80,7 @@ class Register extends React.Component {
       return <Redirect exact to={{ pathname: '/login', state: { username, password } }} />
     return (
       <div>
-        <h1>Create new account</h1>
+        <HeaderStyled>REGISTRATION</HeaderStyled>
         <form onSubmit={this.handleSubmitForm}>
           <Title style={{ color: "red" }}>{(exist) ? 'Username already exist' : ''}</Title>
           <div>
@@ -91,7 +95,7 @@ class Register extends React.Component {
             error={exist}
             required
           />
-          <RegisterButton type="button" onClick={this.handleCheckUsername}>Check</RegisterButton>
+          {/* <RegisterButton type="button" onClick={this.handleCheckUsername}>Check</RegisterButton> */}
           <div>
             <Title>Password:</Title>
           </div>
@@ -129,8 +133,7 @@ class Register extends React.Component {
             onChange={this.handleInputDob}
           />
           <br />
-          <HyperLink><Link exact to="/login">Back</Link></HyperLink>
-          <RegisterButton buttonType={(validate) ? PRIMARY : DISABLED} type="submit" disabled={!validate}>
+          <RegisterButton buttonType={(validate) ? PRIMARY : DISABLED} type="submit">
             Register
           </RegisterButton>
         </form>
