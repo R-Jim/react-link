@@ -36,7 +36,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <h1>Home cc</h1>
+        <h1>Welcome Home</h1>
         <ul>
           {/* <li><Link to="/">Home</Link></li> */}
           {/* <li><Link to="/about">About</Link></li>
