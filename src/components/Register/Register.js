@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Link } from 'react-router-dom'
-import { RegisterButton, PRIMARY, DISABLED } from './styless'
+import { RegisterButton, PRIMARY, DISABLED } from './styles'
 import { Button, HyperLink, Title, InputStyled } from '../styles';
 
 class Register extends React.Component {
