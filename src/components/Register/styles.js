@@ -18,12 +18,12 @@ export const DISABLED = {
 };
 
 export const RegisterButton = styled(Button)`
-  background: ${props => props.theme.bg};
-  color: ${props => props.theme.color};
+  background: ${props => props.buttonType.bg};
+  color: ${props => props.buttonType.color};
     font-size: 1em;
     margin: 1em 0.5em;
     padding: 0.25em 1em;
-    border:  2px solid ${props => props.theme.border};
+    border:  2px solid ${props => props.buttonType.border};
     border-radius:3px;
 
     :disabled{
@@ -32,5 +32,5 @@ export const RegisterButton = styled(Button)`
 `;
 
 RegisterButton.defaultProps = {
-  theme: NORMAL
+  buttonType: NORMAL
 }

@@ -130,7 +130,7 @@ class Register extends React.Component {
           />
           <br />
           <HyperLink><Link exact to="/login">Back</Link></HyperLink>
-          <RegisterButton theme={(validate) ? PRIMARY : DISABLED} type="submit" disabled={!validate}>
+          <RegisterButton buttonType={(validate) ? PRIMARY : DISABLED} type="submit" disabled={!validate}>
             Register
           </RegisterButton>
         </form>

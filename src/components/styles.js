@@ -31,7 +31,7 @@ export const Button = styled.button`
   }
 `;
 
-export const Div = styled.div`
+export const MainContainWrapperStyled = styled.div`
   font-family:monospace;
   width: fit-content;
   margin: auto;
