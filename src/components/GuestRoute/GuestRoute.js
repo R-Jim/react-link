@@ -5,11 +5,10 @@ import {
   Redirect,
 } from 'react-router-dom';
 
-export class AdminRoute extends Component {
+export class GuestRoute extends Component {
   renderRoute = ({ ...props }) => {
     const { accountType, component: Component } = this.props;
-    if (accountType === UNAUTHORIZED) return (<Redirect to="/login" />);
-    if (accountType !== ADMIN) return (<Redirect to="/" exact />);
+    if (accountType !== UNAUTHORIZED) return (<Redirect to="/" />);
     return (
       <Component
         {...props}
@@ -27,4 +26,4 @@ export class AdminRoute extends Component {
   }
 }
 
-export default AdminRoute
+export default GuestRoute;

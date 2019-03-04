@@ -38,17 +38,16 @@ class Login extends React.Component {
     e.preventDefault();
   }
 
-  static getDerivedStateFromProps(props, state) {
-    const { loggedIn } = props;
-    let errMsg = ''
-    if (!loggedIn && state.timeLoggedIn > 0) {
-      errMsg = 'Wrong username or password';
-    }
-    return { ...state, errMsg: errMsg }
+  componentDidUpdate = (prevProps, prevState) => {
+    const { loggedIn, exist, isLogging, loginSuccess, loginFailed, loadAccount, username } = this.props;
+    if (loggedIn) return;
+    if (isLogging && exist) { loginSuccess(); loadAccount(username) }
+    if (isLogging && !exist) loginFailed();
   }
 
   render() {
-    const { username, password, loggedIn } = this.props;
+    const { username, password, loggedIn, error } = this.props;
+
     if (loggedIn) {
       return (
         <Redirect exact to={{ pathname: '/' }} />
@@ -73,7 +72,7 @@ class Login extends React.Component {
             value={password}
             onChange={this.handlePasswordInput}
           />
-          <Title style={{ "color": "red" }}>{this.state.errMsg}</Title>
+          <Title style={{ "color": "red" }}>{error}</Title>
           <Button type="submit">
             Login
         </Button>

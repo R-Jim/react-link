@@ -1,24 +1,15 @@
 import { connect } from 'react-redux'
-import { updateFormValue } from '../../reducers/Account'
+import * as accountReducer from '../../reducers/Account'
 import Account from '../../components/Account'
 
-const mapStateToProps = (state) => {
-  const account = state.account;
-  const login = state.login;
-  return {
-    username: account.username,
-    password: account.password,
-    email: account.email,
-    accountType: login.accountType,
-  }
-}
+const mapStateToProps = (state) => ({
+  account: accountReducer.selectCurrentAccount(state)
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateFormValue: function (fieldName, value) {
-      dispatch(updateFormValue(fieldName, value));
-    }
-  }
+const { updateFormValue } = accountReducer
+
+const mapDispatchToProps = {
+  updateFormValue
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account)

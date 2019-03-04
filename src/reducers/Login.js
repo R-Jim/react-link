@@ -1,20 +1,25 @@
-import { ADMIN, USER, UNAUTHORIZED } from '../reducers/Account';
 const UPDATE_FORM_VALUE = "login/UPDATE_FORM_VALUE";
-const REGISTER_ACCOUNT = "login/REGISTER_ACCOUNT";
-const CHECK_EXIST = "login/CHECK_EXIST";
-const LOGIN = "login/LOGIN";
+const LOGIN_START = "login/LOGIN_START";
+const LOGIN_SUCCESS = "login/LOGIN_SUCCESS";
+const LOGIN_FAILED = "login/LOGIN_FAILED";
 
 const initialState = {
   username: '',
   password: '',
-  accountType: ADMIN,
-  accounts: [
-    { username: 'user', password: 'user', accountType: USER },
-    { username: 'admin', password: 'admin', accountType: ADMIN }
-  ],
   loggedIn: false,
-  exist: false,
+  isLogging: false,
+  error: '',
 }
+
+export const selectError = ({ login }) => login.error;
+
+export const selectUsername = ({ login }) => login.username;
+
+export const selectPassword = ({ login }) => login.password;
+
+export const selectLoggedIn = ({ login }) => login.loggedIn;
+
+export const selectLoginStatus = ({ login }) => login.isLogging;
 
 export const updateFormValue = (fieldName, value) => {
   return {
@@ -26,34 +31,23 @@ export const updateFormValue = (fieldName, value) => {
   }
 }
 
-export const login = (username, password) => {
+export const login = () => {
   return {
-    type: LOGIN,
-    payload: {
-      username,
-      password
-    }
+    type: LOGIN_START,
   }
 }
 
-export const register = (username, password, email, fullname, dob) => {
+export const loginSuccess = () => {
   return {
-    type: REGISTER_ACCOUNT,
-    payload: {
-      username,
-      password,
-      email,
-      fullname,
-      dob,
-    }
+    type: LOGIN_SUCCESS,
   }
 }
 
-export const checkExist = (username) => {
+export const loginFailed = (error) => {
   return {
-    type: CHECK_EXIST,
+    type: LOGIN_FAILED,
     payload: {
-      username
+      error,
     }
   }
 }
@@ -68,41 +62,26 @@ const loginReducer = (state = initialState, action) => {
         [fieldName]: value
       }
     }
-    case LOGIN: {
-      const { payload } = action;
-      const { username, password } = payload;
-      const { accounts } = state;
-      const account = accounts.find((account) => account.username === username && account.password === password);
-      if (!account) {
-        return {
-          ...state,
-          loggedIn: false,
-          accountType: 0,
-        }
-      }
+    case LOGIN_START: {
       return {
         ...state,
+        isLogging: true,
+        loggedIn: false,
+      }
+    }
+    case LOGIN_SUCCESS: {
+      return {
+        ...state,
+        isLogging: false,
         loggedIn: true,
-        accountType: account.accountType
       }
     }
-    case REGISTER_ACCOUNT: {
-      const { payload } = action;
-      const { username, password, email, fullname, dob } = payload;
-      const accounts = [...state.accounts].concat({ username, password, email, fullname, dob, accountType: USER });
+    case LOGIN_FAILED: {
       return {
         ...state,
-        accounts
-      }
-    }
-    case CHECK_EXIST: {
-      const { payload } = action;
-      const { username } = payload;
-      const { accounts } = state;
-      const exist = accounts.some((account) => account.username === username);
-      return {
-        ...state,
-        exist,
+        isLogging: false,
+        loggedIn: false,
+        error: 'Username or password incorrect',
       }
     }
     default: return state;
