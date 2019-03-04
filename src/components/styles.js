@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 // styled.div(`css here`) === styled.div`css here`
 // styled.div("css") !== styled.div"" << ko hieu dau nha
 
