@@ -69,7 +69,7 @@ const loginReducer = (state = initialState, action) => {
       const { payload } = action;
       const { username, password } = payload;
       const { accounts } = state;
-      const loggedIn = accounts.some((account) => account.username == username && account.password == password);
+      const loggedIn = accounts.some((account) => account.username === username && account.password === password);
       return {
         ...state,
         loggedIn,
@@ -88,7 +88,7 @@ const loginReducer = (state = initialState, action) => {
       const { payload } = action;
       const { username } = payload;
       const { accounts } = state;
-      const exist = accounts.some((account) => account.username == username);
+      const exist = accounts.some((account) => account.username === username);
       return {
         ...state,
         exist,

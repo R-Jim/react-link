@@ -1,14 +1,15 @@
 import React from 'react'
-import { Redirect, Link } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { RegisterButton, PRIMARY, DISABLED } from './styles'
-import { Button, HyperLink, Title, InputStyled } from '../styles';
+import { Title, InputStyled, HeaderStyled } from '../styles';
 
 class Register extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      validate: false
+      validate: false,
+      readyToSubmit: false,
     }
   }
 
@@ -46,14 +47,13 @@ class Register extends React.Component {
   }
 
   handleSubmitForm = (e) => {
-    const { username, password, email, fullname, dob, register } = this.props;
-    register(username, password, email, fullname, dob);
+    this.handleCheckUsername();
     e.preventDefault();
   }
 
   handleCheckUsername = () => {
     const { username, checkExist } = this.props;
-    if (username != '') {
+    if (username !== '') {
       checkExist(username);
       this.setState({
         validate: true
@@ -63,20 +63,29 @@ class Register extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     const { exist } = props;
+    const { validate } = state;
     if (exist) {
       return { ...state, validate: !exist }
     }
-    return state
+    if (validate) {
+      const { username, password, email, fullname, dob, register } = props;
+      register(username, password, email, fullname, dob);
+    }
+    const { username, password, email } = props;
+    return {
+      ...state, readyToSubmit:
+        (username.length > 0 && password.length > 0 && email.length > 0)
+    }
   }
 
   render() {
     const { username, password, email, fullname, dob, registered, exist } = this.props;
-    const { validate } = this.state;
+    const { readyToSubmit } = this.state;
     if (registered)
       return <Redirect exact to={{ pathname: '/login', state: { username, password } }} />
     return (
       <div>
-        <h1>Create new account</h1>
+        <HeaderStyled>REGISTRATION</HeaderStyled>
         <form onSubmit={this.handleSubmitForm}>
           <Title style={{ color: "red" }}>{(exist) ? 'Username already exist' : ''}</Title>
           <div>
@@ -91,7 +100,7 @@ class Register extends React.Component {
             error={exist}
             required
           />
-          <RegisterButton type="button" onClick={this.handleCheckUsername}>Check</RegisterButton>
+          {/* <RegisterButton type="button" onClick={this.handleCheckUsername}>Check</RegisterButton> */}
           <div>
             <Title>Password:</Title>
           </div>
@@ -107,7 +116,7 @@ class Register extends React.Component {
             <Title>Email:</Title>
           </div>
           <InputStyled
-            type="text"
+            type="email"
             value={email}
             onChange={this.handleInputEmail}
             required
@@ -124,13 +133,12 @@ class Register extends React.Component {
             <Title>Date of birth:</Title>
           </div>
           <InputStyled
-            type="text"
+            type="date"
             value={dob}
             onChange={this.handleInputDob}
           />
           <br />
-          <HyperLink><Link exact to="/login">Back</Link></HyperLink>
-          <RegisterButton buttonType={(validate) ? PRIMARY : DISABLED} type="submit" disabled={!validate}>
+          <RegisterButton buttonType={(readyToSubmit) ? PRIMARY : DISABLED} type="submit" disabled={!readyToSubmit}>
             Register
           </RegisterButton>
         </form>
