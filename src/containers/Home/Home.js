@@ -1,14 +1,8 @@
-import { connect } from 'react-redux'
-import Home from '../../components/Home'
-import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux';
+import Home from '../../components/Home';
+import { withRouter } from 'react-router-dom';
+import { selectLoggedIn } from '../../reducers/Login';
 
-const mapStateToProps = (state) => {
-  const login = state.login;
-  return {
-    loggedIn: login.loggedIn,
-    username: login.username
-  }
-}
+const mapStateToProps = (state) => ({ loggedIn: selectLoggedIn(state) })
 
-export default withRouter(connect(mapStateToProps)(Home))
-// export default connect(mapStateToProps)(Home)
+export default withRouter(connect(mapStateToProps)(Home));

@@ -1,36 +1,37 @@
 import { connect } from 'react-redux'
 import Register from '../../components/Register'
-import * as RegisterReducer from '../../reducers/Register'
-import { register, checkExist, login } from '../../reducers/Login'
+import * as registerReducer from '../../reducers/Register'
+import { register, checkExistUsername, loadAccount } from '../../reducers/Account'
 
 const mapStateToProps = (state) => {
-  const register = state.register;
-  const login = state.login;
+  const username = registerReducer.selectUsername(state);
+  const registered = registerReducer.selectRegistered(state);
+  const isRegistering = registerReducer.selectIsRegistering(state);
+  let account;
+  if (isRegistering) {
+    account = checkExistUsername(state, username);
+  }
   return {
-    username: register.username,
-    password: register.password,
-    email: register.email,
-    fullname: register.fullname,
-    dob: register.dob,
-    registered: register.registered,
-    exist: login.exist,
+    username,
+    password: registerReducer.selectPassword(state),
+    email: registerReducer.selectEmail(state),
+    fullname: registerReducer.selectFullname(state),
+    dob: registerReducer.selectDob(state),
+    registered,
+    isRegistering,
+    exist: !!account,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateFormValue: function (fieldName, value) {
-      dispatch(RegisterReducer.updateFormValue(fieldName, value));
-    },
-    register: function (username, password, email, fullname, dob) {
-      dispatch(register(username, password, email, fullname, dob));
-      dispatch(RegisterReducer.updateFormValue('registered', true));
-      dispatch(login(username, password));
-    },
-    checkExist: function (username) {
-      dispatch(checkExist(username));
-    }
-  }
+const { updateFormValue, registerStart, registerSuccess, registerFailed } = registerReducer;
+
+const mapDispatchToProps = {
+  updateFormValue,
+  registerStart,
+  registerSuccess,
+  registerFailed,
+  register,
+  loadAccount,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register)

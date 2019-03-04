@@ -7,7 +7,7 @@ import {
 
 class UserRoute extends Component {
   renderRoute = ({ ...props }) => {
-    const { accountType, altPath, component: Component } = this.props;
+    const { accountType, component: Component } = this.props;
     if (accountType === UNAUTHORIZED) return (<Redirect to="/login" />);
     return (
       <Component

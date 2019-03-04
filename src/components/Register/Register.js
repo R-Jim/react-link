@@ -47,34 +47,29 @@ class Register extends React.Component {
   }
 
   handleSubmitForm = (e) => {
-    this.handleCheckUsername();
+    const { registerStart } = this.props;
+    registerStart();
     e.preventDefault();
   }
 
-  handleCheckUsername = () => {
-    const { username, checkExist } = this.props;
-    if (username !== '') {
-      checkExist(username);
-      this.setState({
-        validate: true
-      })
-    }
+  componentDidUpdate = (prevProps, prevState) => {
+    const { username, registered, isRegistering, register, registerSuccess, registerFailed, exist, loadAccount } = this.props;
+    if (registered) return;
+    if (isRegistering && !exist) {
+      registerSuccess()
+      register(this.props);
+      loadAccount(username);
+    };
+    if (isRegistering && exist) registerFailed();
   }
 
+
   static getDerivedStateFromProps(props, state) {
-    const { exist } = props;
-    const { validate } = state;
-    if (exist) {
-      return { ...state, validate: !exist }
-    }
-    if (validate) {
-      const { username, password, email, fullname, dob, register } = props;
-      register(username, password, email, fullname, dob);
-    }
     const { username, password, email } = props;
     return {
       ...state, readyToSubmit:
-        (username.length > 0 && password.length > 0 && email.length > 0)
+        (username.length > 0 && password.length > 0 && email.length > 0),
+      validate: false
     }
   }
 
@@ -82,7 +77,7 @@ class Register extends React.Component {
     const { username, password, email, fullname, dob, registered, exist } = this.props;
     const { readyToSubmit } = this.state;
     if (registered)
-      return <Redirect exact to={{ pathname: '/login', state: { username, password } }} />
+      return <Redirect exact to="/" />
     return (
       <div>
         <HeaderStyled>REGISTRATION</HeaderStyled>

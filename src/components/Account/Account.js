@@ -1,10 +1,6 @@
 import React from 'react';
 
 class Account extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     const { username, email } = this.props;
     return <div>

@@ -8,26 +8,30 @@ import Profile from '../Profile';
 import Pokemon from '../Pokemon';
 import UserRoute from '../UserRoute';
 import AdminRoute from '../AdminRoute';
+import GuestRoute from '../GuestRoute';
 
 import {
   BrowserRouter as Router,
-  Route,
   Switch,
 } from 'react-router-dom';
 
 export class BasicExample extends Component {
   render() {
-    const { accountType } = this.props;
+    const { account } = this.props;
+    const { accountType } = account;
+    console.log(this.props);
     return (
       <Router>
         <Switch>
+          <GuestRoute accountType={accountType} path="/login" component={Login} />
+          <GuestRoute accountType={accountType} path="/register" component={Register} />
+
           <UserRoute exact accountType={accountType} path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
           <UserRoute accountType={accountType} path="/account" component={Account} />
           <UserRoute accountType={accountType} path="/profile" component={Profile} />
           <UserRoute exact accountType={accountType} path="/pokemon" component={Pokemon} />
           <UserRoute accountType={accountType} path="/pokemon/:id" component={Pokemon} />
+
           <AdminRoute exact accountType={accountType} path="/admin" component={Pokemon} />
           <AdminRoute exact accountType={accountType} path="/admin/pokemon" component={Pokemon} />
           <AdminRoute accountType={accountType} path="/admin/pokemon/:id" component={Pokemon} />
