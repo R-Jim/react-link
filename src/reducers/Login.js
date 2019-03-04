@@ -7,8 +7,9 @@ const LOGIN = "login/LOGIN";
 const initialState = {
   username: '',
   password: '',
-  accountType: UNAUTHORIZED,
+  accountType: ADMIN,
   accounts: [
+    { username: 'user', password: 'user', accountType: USER },
     { username: 'admin', password: 'admin', accountType: ADMIN }
   ],
   loggedIn: false,
@@ -72,10 +73,16 @@ const loginReducer = (state = initialState, action) => {
       const { username, password } = payload;
       const { accounts } = state;
       const account = accounts.find((account) => account.username === username && account.password === password);
-      const loggedIn = accounts.some((account) => account.username === username && account.password === password);
+      if (!account) {
+        return {
+          ...state,
+          loggedIn: false,
+          accountType: 0,
+        }
+      }
       return {
         ...state,
-        loggedIn,
+        loggedIn: true,
         accountType: account.accountType
       }
     }
