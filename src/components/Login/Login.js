@@ -49,7 +49,6 @@ class Login extends React.Component {
 
   render() {
     const { username, password, loggedIn } = this.props;
-
     if (loggedIn) {
       return (
         <Redirect exact to={{ pathname: '/' }} />

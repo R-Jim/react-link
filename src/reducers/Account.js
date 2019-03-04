@@ -1,9 +1,14 @@
+export const UNAUTHORIZED = 0;
+export const ADMIN = 1;
+export const USER = 2;
+
 const UPDATE_FORM_VALUE = "account/UPDATE_FORM_VALUE";
 
 const initialState = {
   username: 'testing',
   password: '',
   email: '',
+  accountType: UNAUTHORIZED
 }
 
 export const updateFormValue = (fieldName, value) => {
