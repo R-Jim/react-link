@@ -1,17 +1,17 @@
-import React from 'react'
+import React from 'react';
 // import PropTypes from 'prop-types'
-import Home from './containers/Home'
-import Login from './containers/Login'
-import Register from './containers/Register'
-import Account from './containers/Account'
-import Profile from './components/Profile'
-import Pokemon from './components/Pokemon'
+import Home from './containers/Home';
+import Login from './containers/Login';
+import Register from './containers/Register';
+import Account from './containers/Account';
+import Profile from './components/Profile';
+import Pokemon from './components/Pokemon';
 
 import {
   BrowserRouter as Router,
   Route,
   Switch
-} from 'react-router-dom'
+} from 'react-router-dom';
 
 const BasicExample = () => (
   <Router>

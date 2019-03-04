@@ -1,6 +1,6 @@
-import React from 'react'
-import { Redirect } from 'react-router-dom'
-import { RegisterButton, PRIMARY, DISABLED } from './styles'
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { RegisterButton, PRIMARY, DISABLED } from './styles';
 import { Title, InputStyled, HeaderStyled } from '../styles';
 
 class Register extends React.Component {
@@ -147,4 +147,4 @@ class Register extends React.Component {
   }
 }
 
-export default Register
+export default Register;

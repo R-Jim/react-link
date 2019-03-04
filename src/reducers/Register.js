@@ -1,4 +1,4 @@
-const UPDATE_FORM_VALUE = "register/UPDATE_FORM_VALUE"
+const UPDATE_FORM_VALUE = "register/UPDATE_FORM_VALUE";
 
 const initialState = {
   username: '',
