@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 // Logger with default options
 import logger from 'redux-logger';
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
 import rootReducer from '../reducers';
 
@@ -10,8 +10,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['login', 'register']
-}
+  blacklist: ['register', 'login', 'account']
+};
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 

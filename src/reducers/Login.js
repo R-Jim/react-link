@@ -1,3 +1,4 @@
+import { ADMIN, USER, UNAUTHORIZED } from '../reducers/Account';
 const UPDATE_FORM_VALUE = "login/UPDATE_FORM_VALUE";
 const REGISTER_ACCOUNT = "login/REGISTER_ACCOUNT";
 const CHECK_EXIST = "login/CHECK_EXIST";
@@ -6,8 +7,9 @@ const LOGIN = "login/LOGIN";
 const initialState = {
   username: '',
   password: '',
+  accountType: UNAUTHORIZED,
   accounts: [
-    { username: 'admin', password: 'admin' }
+    { username: 'admin', password: 'admin', accountType: ADMIN }
   ],
   loggedIn: false,
   exist: false,
@@ -69,16 +71,18 @@ const loginReducer = (state = initialState, action) => {
       const { payload } = action;
       const { username, password } = payload;
       const { accounts } = state;
+      const account = accounts.find((account) => account.username === username && account.password === password);
       const loggedIn = accounts.some((account) => account.username === username && account.password === password);
       return {
         ...state,
         loggedIn,
+        accountType: account.accountType
       }
     }
     case REGISTER_ACCOUNT: {
       const { payload } = action;
       const { username, password, email, fullname, dob } = payload;
-      const accounts = [...state.accounts].concat({ username, password, email, fullname, dob });
+      const accounts = [...state.accounts].concat({ username, password, email, fullname, dob, accountType: USER });
       return {
         ...state,
         accounts

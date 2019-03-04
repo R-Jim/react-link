@@ -1,12 +1,14 @@
-const UPDATE_FORM_VALUE = "register/UPDATE_FORM_VALUE";
+export const UNAUTHORIZED = 0;
+export const ADMIN = 1;
+export const USER = 2;
+
+const UPDATE_FORM_VALUE = "account/UPDATE_FORM_VALUE";
 
 const initialState = {
-  username: '',
+  username: 'testing',
   password: '',
   email: '',
-  fullname: '',
-  dob: '',
-  registered: false,
+  accountType: UNAUTHORIZED
 }
 
 export const updateFormValue = (fieldName, value) => {
@@ -14,23 +16,20 @@ export const updateFormValue = (fieldName, value) => {
     type: UPDATE_FORM_VALUE,
     payload: {
       fieldName,
-      value,
+      value
     }
   }
 }
 
-const registerReducer = (state = initialState, action) => {
+const accountReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORM_VALUE: {
       const { payload } = action;
       const { fieldName, value } = payload;
-      return {
-        ...state,
-        [fieldName]: value
-      }
+      return { ...state, [fieldName]: value };
     }
     default: return state;
   }
 }
 
-export default registerReducer;
+export default accountReducer;

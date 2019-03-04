@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicExample from './BasicExample';
+import BasicExample from './containers/BasicExample';
 import configureStore from './stores';
 import { Provider } from 'react-redux';
 import { MainContainWrapperStyled, BodyWrapperStyled } from './components/styles';

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { LoginWrapper, FormInput, IconStyled, PStyled } from './styles';
 import { Button, HyperLink, Title, HeaderStyled } from '../styles';
@@ -49,7 +49,6 @@ class Login extends React.Component {
 
   render() {
     const { username, password, loggedIn } = this.props;
-
     if (loggedIn) {
       return (
         <Redirect exact to={{ pathname: '/' }} />
@@ -85,4 +84,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default Login;
