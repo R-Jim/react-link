@@ -41,6 +41,7 @@ class Home extends React.Component {
           <li><Link to="/account">Account</Link></li>
           <li><Link to="/profile">Pofile</Link></li>
           <li><Link to="/pokemon">Pokemon</Link></li>
+          <li><Link to="/admin">Admin</Link></li>
         </ul>
         {/* {(!this.state.loggedIn) ? <p> <Link to="/login">Login</Link></p> : <p onClick={this.handleLoggout}>Logout</p>} */}
         <p> <Link to="/login">Login</Link></p>

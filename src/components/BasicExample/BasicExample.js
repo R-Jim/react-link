@@ -6,35 +6,14 @@ import Register from '../../containers/Register';
 import Account from '../../containers/Account';
 import Profile from '../Profile';
 import Pokemon from '../Pokemon';
-import { ADMIN, USER, UNAUTHORIZED } from '../../reducers/Account';
+import UserRoute from '../UserRoute';
+import AdminRoute from '../AdminRoute';
 
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
 } from 'react-router-dom';
-
-class UserRoute extends Component {
-  renderRoute = ({ ...props }) => {
-    const { accountType, altPath, component: Component } = this.props;
-    if (accountType === UNAUTHORIZED) return (<Redirect to="/login" />);
-    return (
-      <Component
-        {...props}
-      />
-    )
-  }
-  render() {
-    const { component, ...rest } = this.props;
-    return (
-      <Route
-        {...rest}
-        render={this.renderRoute}
-      />
-    );
-  }
-}
 
 export class BasicExample extends Component {
   render() {
@@ -48,7 +27,12 @@ export class BasicExample extends Component {
           <UserRoute accountType={accountType} path="/account" component={Account} />
           <UserRoute accountType={accountType} path="/profile" component={Profile} />
           <UserRoute exact accountType={accountType} path="/pokemon" component={Pokemon} />
-          <UserRoute accountType={accountType} path="/pokemon:id" component={Pokemon} />
+          <UserRoute accountType={accountType} path="/pokemon/:id" component={Pokemon} />
+          <AdminRoute exact accountType={accountType} path="/admin" component={Pokemon} />
+          <AdminRoute exact accountType={accountType} path="/admin/pokemon" component={Pokemon} />
+          <AdminRoute accountType={accountType} path="/admin/pokemon/:id" component={Pokemon} />
+          <AdminRoute exact accountType={accountType} path="/admin/user" component={Pokemon} />
+          <AdminRoute accountType={accountType} path="/admin/user/:id" component={Pokemon} />
         </Switch>
       </Router>
     )
