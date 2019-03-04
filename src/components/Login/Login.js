@@ -58,7 +58,6 @@ class Login extends React.Component {
     return (
       <LoginWrapper>
         <IconStyled src={Icon}></IconStyled>
-        <Title style={{ "color": "red" }}>{this.state.errMsg}</Title>
         <HeaderStyled>WELCOME</HeaderStyled>
         <form onSubmit={this.submitForm}>
           <div><Title>Username:</Title></div>
@@ -75,7 +74,7 @@ class Login extends React.Component {
             value={password}
             onChange={this.handlePasswordInput}
           />
-          <br />
+          <Title style={{ "color": "red" }}>{this.state.errMsg}</Title>
           <Button type="submit">
             Login
         </Button>
