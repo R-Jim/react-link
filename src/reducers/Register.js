@@ -14,8 +14,8 @@ const initialState = {
   error: '',
 }
 
-export const selectState = ({ register }) => register;
-export const selectError = ({ register }) => register.error;
+export const selectRegisterFormData = ({ register }) => register;
+export const selectRegistrationError = ({ register }) => register.error;
 export const selectUsername = ({ register }) => register.username;
 export const selectPassword = ({ register }) => register.password;
 export const selectEmail = ({ register }) => register.email;

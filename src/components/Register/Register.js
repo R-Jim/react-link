@@ -62,7 +62,6 @@ class Register extends React.Component {
 
   render() {
     const { username, password, email, fullname, dob, error } = this.props;
-    console.log(error);
     const { readyToSubmit } = this.state;
     return (
       <div>

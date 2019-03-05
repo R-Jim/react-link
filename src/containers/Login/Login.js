@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Login from '../../components/Login';
 import * as loginReducer from '../../reducers/Login';
-import * as accountReducer from '../../reducers/Account';
 
 const mapStateToProps = (state) => ({
   username: loginReducer.selectUsername(state),
@@ -11,15 +10,11 @@ const mapStateToProps = (state) => ({
   error: loginReducer.selectError(state),
 })
 
-const { login, updateFormValue, loginFailed, loginSuccess } = loginReducer;
-const { loadAccount } = accountReducer;
+const { login, updateFormValue } = loginReducer;
 
 const mapDispatchToProps = {
   updateFormValue,
   login,
-  loginSuccess,
-  loginFailed,
-  loadAccount,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)
