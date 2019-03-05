@@ -23,7 +23,7 @@ export default function configureStore() {
   const store = createStore(
     persistedReducer,
     initialState,
-    composeEnhancers(applyMiddleware(logger), applyMiddleware(sagaMiddleware)),
+    composeEnhancers(applyMiddleware(logger, sagaMiddleware)),
   );
   let persistor = persistStore(store);
 
