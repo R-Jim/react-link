@@ -3,6 +3,7 @@ import BasicExample from './containers/BasicExample';
 import configureStore from './stores';
 import { Provider } from 'react-redux';
 import { MainContainWrapperStyled, BodyWrapperStyled } from './components/styles';
+
 const { store } = configureStore();
 
 class App extends React.Component {
