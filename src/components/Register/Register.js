@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { RegisterButton, PRIMARY, DISABLED } from './styles';
 import { Title, InputStyled, HeaderStyled } from '../styles';
 
@@ -52,18 +51,6 @@ class Register extends React.Component {
     e.preventDefault();
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    const { username, registered, isRegistering, register, registerSuccess, registerFailed, exist, loadAccount } = this.props;
-    if (registered) return;
-    if (isRegistering && !exist) {
-      registerSuccess()
-      register(this.props);
-      loadAccount(username);
-    };
-    if (isRegistering && exist) registerFailed();
-  }
-
-
   static getDerivedStateFromProps(props, state) {
     const { username, password, email } = props;
     return {
@@ -74,15 +61,13 @@ class Register extends React.Component {
   }
 
   render() {
-    const { username, password, email, fullname, dob, registered, exist } = this.props;
+    const { username, password, email, fullname, dob, error } = this.props;
     const { readyToSubmit } = this.state;
-    if (registered)
-      return <Redirect exact to="/" />
     return (
       <div>
         <HeaderStyled>REGISTRATION</HeaderStyled>
         <form onSubmit={this.handleSubmitForm}>
-          <Title style={{ color: "red" }}>{(exist) ? 'Username already exist' : ''}</Title>
+          <Title style={{ color: "red" }}>{error}</Title>
           <div>
             <Title>Username:</Title>
           </div>
@@ -92,7 +77,7 @@ class Register extends React.Component {
             pattern="[A-Za-z1-9_]{0,}"
             onChange={this.handleInputUsername}
             title="Username can only have A-Z, a-z, 1-9 or _"
-            error={exist}
+            error={!!error}
             required
           />
           {/* <RegisterButton type="button" onClick={this.handleCheckUsername}>Check</RegisterButton> */}

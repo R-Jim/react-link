@@ -31,28 +31,15 @@ class Login extends React.Component {
   }
 
   submitForm = (e) => {
-    const { username, password, login } = this.props;
+    const { login } = this.props;
     const timeLoggedIn = this.state.timeLoggedIn + 1;
     this.setState({ timeLoggedIn })
-    login(username, password);
+    login();
     e.preventDefault();
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    const { loggedIn, exist, isLogging, loginSuccess, loginFailed, loadAccount, username } = this.props;
-    if (loggedIn) return;
-    if (isLogging && exist) { loginSuccess(); loadAccount(username) }
-    if (isLogging && !exist) loginFailed();
-  }
-
   render() {
-    const { username, password, loggedIn, error } = this.props;
-
-    if (loggedIn) {
-      return (
-        <Redirect exact to={{ pathname: '/' }} />
-      );
-    }
+    const { username, password, error } = this.props;
     return (
       <LoginWrapper>
         <IconStyled src={Icon}></IconStyled>

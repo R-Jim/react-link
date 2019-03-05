@@ -3,9 +3,9 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
-import rootReducer from '../reducers';
+import rootReducer, { REHYDRATION_COMPLETE } from '../reducers';
 import createSagaMiddleware from 'redux-saga';
-import { helloSaga } from '../saga';
+import rootSaga from '../sagas';
 
 const initialState = {};
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -25,10 +25,9 @@ export default function configureStore() {
     initialState,
     composeEnhancers(applyMiddleware(logger, sagaMiddleware)),
   );
-  let persistor = persistStore(store);
+  const persistor = persistStore(store, null, () => store.dispatch({ type: REHYDRATION_COMPLETE }));
 
-  sagaMiddleware.run(helloSaga);
+  sagaMiddleware.run(rootSaga);
 
   return { store, persistor };
 }
-

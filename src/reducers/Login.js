@@ -1,7 +1,7 @@
-const UPDATE_FORM_VALUE = "login/UPDATE_FORM_VALUE";
-const LOGIN_START = "login/LOGIN_START";
-const LOGIN_SUCCESS = "login/LOGIN_SUCCESS";
-const LOGIN_FAILED = "login/LOGIN_FAILED";
+export const UPDATE_FORM_VALUE = "login/UPDATE_FORM_VALUE";
+export const LOGIN_START = "login/LOGIN_START";
+export const LOGIN_SUCCESS = "login/LOGIN_SUCCESS";
+export const LOGIN_FAILED = "login/LOGIN_FAILED";
 
 const initialState = {
   username: '',
