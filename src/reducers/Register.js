@@ -1,7 +1,7 @@
-const UPDATE_FORM_VALUE = "register/UPDATE_FORM_VALUE";
-const REGISTER_START = "register/REGISTER_START";
-const REGISTER_SUCCESS = "register/REGISTER_SUCCESS";
-const REGISTER_FAILED = "register/REGISTER_FAILED";
+export const UPDATE_FORM_VALUE = "register/UPDATE_FORM_VALUE";
+export const REGISTER_START = "register/REGISTER_START";
+export const REGISTER_SUCCESS = "register/REGISTER_SUCCESS";
+export const REGISTER_FAILED = "register/REGISTER_FAILED";
 
 const initialState = {
   username: '',
@@ -11,8 +11,11 @@ const initialState = {
   dob: '',
   registered: false,
   isRegistering: false,
+  error: '',
 }
 
+export const selectState = ({ register }) => register;
+export const selectError = ({ register }) => register.error;
 export const selectUsername = ({ register }) => register.username;
 export const selectPassword = ({ register }) => register.password;
 export const selectEmail = ({ register }) => register.email;
