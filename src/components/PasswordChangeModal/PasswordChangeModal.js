@@ -32,16 +32,19 @@ export class PasswordChangeModal extends Component {
   }
 
   submitForm = (e) => {
-    const { changePassword, newPassword } = this.props;
+    const { changePassword, newPassword, clearError } = this.props;
     const { confirmNewPassword } = this.state;
+    clearError();
     if (newPassword === confirmNewPassword) {
       changePassword();
       this.setState({
-        errorConfirmPassword: ''
+        errorConfirmPassword: '',
+        confirmNewPassword: ''
       })
     } else {
       this.setState({
-        errorConfirmPassword: 'Confirm password not match'
+        errorConfirmPassword: 'Confirm password not match',
+        confirmNewPassword: ''
       })
     }
     e.preventDefault();

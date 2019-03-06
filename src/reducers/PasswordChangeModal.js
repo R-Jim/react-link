@@ -5,6 +5,7 @@ export const OPEN_MODAL = 'passwordChangeModal/OPEN_MODAL';
 export const CLOSE_MODAL = 'passwordChangeModal/CLOSE_MODAL';
 const UPDATE_FORM_VALUE = 'passwordChangeModal/UPDATE_FORM_VALUE';
 const RESET_FORM = 'passwordChangeModal/RESET_FORM';
+export const CLEAR_ERROR = 'passwordChangeModal/CLEAR_ERROR';
 
 const initialState = {
   isOpen: false,
@@ -50,6 +51,10 @@ export const changePasswordFail = () => ({
 
 export const resetForm = () => ({
   type: RESET_FORM
+})
+
+export const clearError = () => ({
+  type: CLEAR_ERROR
 })
 
 const passwordChangeModalReducer = (state = initialState, action) => {
@@ -98,6 +103,12 @@ const passwordChangeModalReducer = (state = initialState, action) => {
     }
     case RESET_FORM: {
       return initialState
+    }
+    case CLEAR_ERROR: {
+      return {
+        ...state,
+        error: ''
+      }
     }
     default: {
       return state
