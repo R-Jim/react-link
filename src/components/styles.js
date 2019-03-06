@@ -29,7 +29,7 @@ export const InputStyled = styled.input`
   }
 `;
 
-export const Button = styled.button`
+export const ButtonStyled = styled.button`
   color: #fff;
     text-decoration: none;
     font-weight: 650;
@@ -49,21 +49,19 @@ export const Button = styled.button`
   :hover{
     cursor:pointer;
   }
+  a{
+    text-decoration:none;
+    color:white;
+  }
 `;
 
 export const MainContainWrapperStyled = styled.div`
   font-family:-apple-system,BlinkMacSystemFont,Open sans,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
-  width: fit-content;
-  /* margin: auto; */
+  width:100%;
+  height:100%;
+  display: flex;
   align-items: center;
-  padding: 20px 30px;
-  border-radius: 10px;
-  box-shadow:0 3px 10px 3px #e7e7e7;
-  background:white;
-  height: fit-content;
-  min-height: 480px;
-  /* max-height: 540px; */
-  width: 300px;
+  justify-content: center;
 `;
 
 export const Title = styled.p`
@@ -83,18 +81,6 @@ export const HyperLink = styled.span`
     color:#189577;
     font-weight:600;
   }
-`;
-
-export const BodyWrapperStyled = styled.div`
-  /* width:100%; */
-  margin: 0;
-  padding: 0;
-  height:-webkit-fill-available;
-  margin:-7;
-  background:#f6f6f6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const HeaderStyled = styled.p`

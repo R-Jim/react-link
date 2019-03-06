@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from '../styles';
+import { ButtonStyled } from '../styles';
 
 export const NORMAL = {
   bg: "white",
@@ -17,7 +17,7 @@ export const DISABLED = {
   border: "darkgray",
 };
 
-export const RegisterButton = styled(Button)`
+export const RegisterButton = styled(ButtonStyled)`
   background: ${props => props.buttonType.bg};
   color: ${props => props.buttonType.color};
 `;
@@ -25,3 +25,16 @@ export const RegisterButton = styled(Button)`
 RegisterButton.defaultProps = {
   buttonType: NORMAL
 }
+
+export const RegisterWrapper = styled.div`
+  width: fit-content;
+  align-items: center;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow:0 3px 10px 3px #e7e7e7;
+  background:white;
+  height: fit-content;
+  min-height: 480px;
+  width: 300px;
+  margin:auto;
+`;
