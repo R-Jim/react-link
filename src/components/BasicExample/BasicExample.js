@@ -9,6 +9,7 @@ import Pokemon from '../Pokemon';
 import UserRoute from '../UserRoute';
 import AdminRoute from '../AdminRoute';
 import GuestRoute from '../GuestRoute';
+import Setting from '../Setting';
 
 import {
   BrowserRouter as Router,
@@ -31,6 +32,7 @@ export class BasicExample extends Component {
           <UserRoute accountType={accountType} path="/profile" component={Profile} />
           <UserRoute exact accountType={accountType} path="/pokemon" component={Pokemon} />
           <UserRoute accountType={accountType} path="/pokemon/:id" component={Pokemon} />
+          <UserRoute accountType={accountType} path="/setting" component={Setting} />
 
           <AdminRoute exact accountType={accountType} path="/admin" component={Pokemon} />
           <AdminRoute exact accountType={accountType} path="/admin/pokemon" component={Pokemon} />

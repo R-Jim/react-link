@@ -5,7 +5,6 @@ import account from './Account';
 
 export const REHYDRATION_COMPLETE = 'REHYDRATION_COMPLETE';
 
-
 export default combineReducers({
   login,
   register,
