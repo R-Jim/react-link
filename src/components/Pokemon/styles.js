@@ -12,6 +12,16 @@ export const PokemonCard = styled.div`
     color:white;
     font-weight:600;
     font-size:1.1em;
+    min-height:100px;
+    min-width:150px;
+    max-width:370px;
+
+    @media (max-width: 800px) {
+    width:15%;
+    height:40%;
+    margin:10px;
+    float:left;
+  }
 
     :hover {
     background: linear-gradient(10deg, #043eff 0, #62d2fa);

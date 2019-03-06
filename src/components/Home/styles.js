@@ -7,6 +7,12 @@ export const LeftPanel = styled.div`
   box-sizing: border-box;
   height: 100%;
   text-align: center;
+  overflow:scroll;
+
+  @media (max-width: 800px) {
+    width:100%;
+    height:20%;
+  }
 `;
 
 export const CenterPanel = styled.div`
@@ -15,6 +21,10 @@ export const CenterPanel = styled.div`
   padding: 20px;
   box-sizing: border-box;
   height: 100%;
+  @media (max-width: 800px) {
+    width:100%;
+    height:60%;
+  }
 `;
 
 export const RightPanel = styled.div`
@@ -23,6 +33,11 @@ export const RightPanel = styled.div`
   height: 100%;
   padding: 10px;
   box-sizing: border-box;
+  overflow:scroll;
+  @media (max-width: 800px) {
+    width:100%;
+    height:20%;
+  }
 `;
 
 export const HomeContentWrapper = styled.div`
@@ -49,4 +64,15 @@ export const ActionButton = styled.button`
     text-align: center;
     vertical-align: middle;
     height: 100%;
+`;
+
+export const PokemonWrapper = styled.div`
+    height:100%;
+    width:100%;
+    margin:auto;
+
+    @media (max-width: 800px) {
+    width:90%;
+    height:60%;
+  }
 `;

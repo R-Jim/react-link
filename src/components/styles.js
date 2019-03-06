@@ -34,6 +34,7 @@ export const ButtonStyled = styled.button`
     text-decoration: none;
     font-weight: 650;
     width: 100%;
+    min-width:150px;
     height: 40px;
     display: flex;
     justify-content: center;
@@ -88,4 +89,8 @@ export const HeaderStyled = styled.p`
     font-size: 1.6em;
     margin-top: 0;
     color: gray;
+`;
+export const BodyContentWrapper = styled.div`
+  height:100%;
+  width:100%;
 `;

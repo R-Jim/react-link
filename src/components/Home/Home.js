@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   HomeContentWrapper,
   LeftPanel, CenterPanel, RightPanel,
-  ActionButtonWrapper, ActionButton
+  ActionButtonWrapper, ActionButton, PokemonWrapper
 } from './styles';
 import { ButtonStyled } from '../styles';
 import MainScreen from '../MainScreen';
@@ -61,9 +61,17 @@ class Home extends React.Component {
           </ActionButtonWrapper>
         </CenterPanel>
         <RightPanel>
-          <Pokemon />
-          <Pokemon />
-          <Pokemon />
+          <PokemonWrapper>
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+          </PokemonWrapper>
         </RightPanel>
       </HomeContentWrapper>
     )

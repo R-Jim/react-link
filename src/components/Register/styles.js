@@ -38,3 +38,4 @@ export const RegisterWrapper = styled.div`
   width: 300px;
   margin:auto;
 `;
+

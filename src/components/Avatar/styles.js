@@ -6,6 +6,7 @@ export const AvatarStyled = styled.div`
   background:greenyellow;
   padding:20px;
   box-sizing:border-box;
+  min-width:150px;
 `;
 
 export const AvatarImgWrapper = styled.div`
