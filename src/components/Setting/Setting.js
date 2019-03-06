@@ -18,7 +18,7 @@ export class Setting extends Component {
     )
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     clearInterval(this.timerID);
   }
 
