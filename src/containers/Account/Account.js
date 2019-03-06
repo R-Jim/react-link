@@ -1,15 +1,14 @@
-import { connect } from 'react-redux'
-import * as accountReducer from '../../reducers/Account'
-import Account from '../../components/Account'
+import { connect } from 'react-redux';
+import { selectCurrentAccount } from '../../reducers/Account';
+import Account from '../../components/Account';
+import { toggleModal } from '../../reducers/PasswordChangeModal';
 
 const mapStateToProps = (state) => ({
-  account: accountReducer.selectCurrentAccount(state)
+  account: selectCurrentAccount(state)
 })
 
-const { updateFormValue } = accountReducer
-
 const mapDispatchToProps = {
-  updateFormValue
+  toggleModal,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Account)
+export default connect(mapStateToProps, mapDispatchToProps)(Account);
