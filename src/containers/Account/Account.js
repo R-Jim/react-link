@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { selectCurrentAccount } from '../../reducers/Account';
+import { toggleModal } from '../../reducers/form';
 import Account from '../../components/Account';
-import { toggleModal } from '../../reducers/PasswordChangeModal';
 
 const mapStateToProps = (state) => ({
   account: selectCurrentAccount(state)

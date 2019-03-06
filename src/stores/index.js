@@ -13,7 +13,7 @@ const persistConfig = {
   key: 'root',
   storage,
   // blacklist: ['register', 'login', 'account', 'passwordChangeModal']
-  blacklist: ['register', 'login', 'passwordChangeModal']
+  blacklist: ['register', 'login', 'form']
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

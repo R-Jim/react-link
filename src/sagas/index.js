@@ -1,7 +1,7 @@
 import { all, take } from 'redux-saga/effects';
 import loginSaga from './login';
 import registerSaga from './register';
-import passwordChangeSaga from './passwordChange';
+import userSaga from './user';
 import { REHYDRATION_COMPLETE } from '../reducers';
 
 export default function* rootSaga() {
@@ -9,6 +9,6 @@ export default function* rootSaga() {
   yield all([
     loginSaga(),
     registerSaga(),
-    passwordChangeSaga(),
+    userSaga(),
   ])
 }

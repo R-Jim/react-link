@@ -5,6 +5,7 @@ import FBIcon from '../../icons/facebook.png';
 import GGIcon from '../../icons/google+.png';
 import TTIcon from '../../icons/twitter.png';
 import PasswordChangeModal from '../../containers/PasswordChangeModal';
+import { FORM_NAME } from '../../containers/PasswordChangeModal/PasswordChangeModal';
 
 class Account extends React.Component {
   render() {
@@ -18,7 +19,7 @@ class Account extends React.Component {
         <Title>
           Email: {account.email}
         </Title>
-        <ButtonStyled onClick={() => toggleModal(true)}>
+        <ButtonStyled onClick={() => toggleModal(FORM_NAME, true)}>
           New password
         </ButtonStyled>
         <SocialIconImg src={FBIcon} />
