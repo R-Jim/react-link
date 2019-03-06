@@ -1,5 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  HomeContentWrapper,
+  LeftPanel, CenterPanel, RightPanel,
+  ActionButtonWrapper, ActionButton, PokemonWrapper
+} from './styles';
+import { ButtonStyled } from '../styles';
+import MainScreen from '../MainScreen';
+import Pokemon from '../Pokemon';
+import Avatar from '../Avatar';
 
 class Home extends React.Component {
   constructor(props) {
@@ -35,18 +44,36 @@ class Home extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Welcome Home</h1>
-        <ul>
-          <li><Link to="/account">Account</Link></li>
-          <li><Link to="/profile">Pofile</Link></li>
-          <li><Link to="/pokemon">Pokemon</Link></li>
-          <li><Link to="/setting">Setting</Link></li>
-          <li><Link to="/admin">Admin</Link></li>
-        </ul>
-        {/* {(!this.state.loggedIn) ? <p> <Link to="/login">Login</Link></p> : <p onClick={this.handleLoggout}>Logout</p>} */}
-        <p> <Link to="/login">Login</Link></p>
-      </div>
+      <HomeContentWrapper>
+        <LeftPanel>
+          <Avatar />
+          <ButtonStyled><Link to="/account">Account</Link></ButtonStyled>
+          <ButtonStyled><Link to="/profile">Profile</Link></ButtonStyled>
+          <ButtonStyled><Link to="/setting">Setting</Link></ButtonStyled>
+        </LeftPanel>
+        <CenterPanel>
+          <MainScreen />
+          <ActionButtonWrapper>
+            <ActionButton>Battle</ActionButton>
+            <ActionButton>Play</ActionButton>
+            <ActionButton>Eat</ActionButton>
+            <ActionButton>Clean</ActionButton>
+          </ActionButtonWrapper>
+        </CenterPanel>
+        <RightPanel>
+          <PokemonWrapper>
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+            <Pokemon />
+          </PokemonWrapper>
+        </RightPanel>
+      </HomeContentWrapper>
     )
   }
 }

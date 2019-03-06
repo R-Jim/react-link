@@ -4,18 +4,19 @@ import styled from 'styled-components';
 import { InputStyled } from '../styles'
 
 export const LoginWrapper = styled.div`
+  width: fit-content;
+  align-items: center;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow:0 3px 10px 3px #e7e7e7;
+  background:white;
+  height: fit-content;
+  min-height: 480px;
+  width: 300px;
+  margin:auto;
 `;
 
-/**
- * const fullName = fullName + ' ' + lastName;
- * const fullName = `${fullName} ${lastName}`;
- */
-
 export const FormInput = styled(InputStyled)`
-  /* border-color: ${(props) => {
-    if (props.error) return 'crimson';
-    return 'blueviolet';
-  }}; */
 `;
 
 export const IconStyled = styled.img`

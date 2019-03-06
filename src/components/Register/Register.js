@@ -1,5 +1,5 @@
 import React from 'react';
-import { RegisterButton, PRIMARY, DISABLED } from './styles';
+import { RegisterButton, PRIMARY, DISABLED, RegisterWrapper } from './styles';
 import { Title, InputStyled, HeaderStyled } from '../styles';
 
 class Register extends React.Component {
@@ -64,7 +64,7 @@ class Register extends React.Component {
     const { username, password, email, fullname, dob, error } = this.props;
     const { readyToSubmit } = this.state;
     return (
-      <div>
+      <RegisterWrapper>
         <HeaderStyled>REGISTRATION</HeaderStyled>
         <form onSubmit={this.handleSubmitForm}>
           <Title style={{ color: "red" }}>{error}</Title>
@@ -122,7 +122,7 @@ class Register extends React.Component {
             Register
           </RegisterButton>
         </form>
-      </div >
+      </RegisterWrapper >
     )
   }
 }

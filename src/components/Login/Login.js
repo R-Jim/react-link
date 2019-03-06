@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { LoginWrapper, FormInput, IconStyled, PStyled } from './styles';
-import { Button, HyperLink, Title, HeaderStyled } from '../styles';
+import { ButtonStyled, HyperLink, Title, HeaderStyled } from '../styles';
 import Icon from '../../icon.png';
 
 class Login extends React.Component {
@@ -60,9 +60,9 @@ class Login extends React.Component {
             onChange={this.handlePasswordInput}
           />
           <Title style={{ "color": "red" }}>{error}</Title>
-          <Button type="submit">
+          <ButtonStyled type="submit">
             Login
-        </Button>
+        </ButtonStyled>
           <PStyled>Want to join? <HyperLink><Link to="/register">Sign up</Link></HyperLink></PStyled>
         </form>
       </LoginWrapper >
