@@ -6,7 +6,6 @@ import {
 } from './styles';
 import { Title, InputStyled } from '../styles';
 import { EDIT_PROFILE_FORM } from '../../reducers/form';
-import { getCountryListSaga } from '../../sagas/resource';
 import Select from 'react-select';
 import avatar from '../../icons/facebook.png';
 
