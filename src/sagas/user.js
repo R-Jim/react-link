@@ -1,6 +1,23 @@
 import { take, select, all, put } from 'redux-saga/effects';
-import { selectCurrentAccount, changePassword } from '../reducers/Account';
-import { FORM_SUBMIT_START, selectForm, resetForm, formSubmitFail, formSubmitSuccess, PASSWORD_CHANGE_FORM } from '../reducers/form';
+import { selectCurrentAccount, changePassword, accountProfileUpdate } from '../reducers/Account';
+import {
+  FORM_SUBMIT_START, selectForm, resetForm, formSubmitFail, formSubmitSuccess,
+  PASSWORD_CHANGE_FORM, EDIT_PROFILE_FORM
+} from '../reducers/form';
+
+export function* editProfileSaga() {
+  while (1) {
+    const action = yield take(FORM_SUBMIT_START);
+    const formName = action.payload;
+    if (formName !== EDIT_PROFILE_FORM) {
+      return;
+    }
+    const form = yield select(selectForm, formName);
+    yield put(formSubmitSuccess());
+    yield put(accountProfileUpdate(form.data));
+    yield put(resetForm(formName));
+  }
+}
 
 export function* passwordChangeSaga() {
   while (1) {
@@ -29,5 +46,6 @@ export function* passwordChangeSaga() {
 export default function* userRootSaga() {
   yield all([
     passwordChangeSaga(),
+    editProfileSaga(),
   ])
 }

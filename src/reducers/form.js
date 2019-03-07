@@ -2,11 +2,13 @@ export const FORM_SUBMIT_START = 'form/FORM_SUBMIT_START';
 export const FORM_SUBMIT_SUCCESS = 'form/FORM_SUBMIT_SUCCESS';
 export const FORM_SUBMIT_FAIL = 'form/FORM_SUBMIT_FAIL';
 export const UPDATE_FORM_PROPERTY = 'form/UPDATE_FORM_PROPERTY';
+const LOAD_DATA_TO_FORM = 'form/LOAD_DATA_TO_FORM';
 const UPDATE_FORM_VALUE = 'form/UPDATE_FORM_VALUE';
 const RESET_FORM = 'form/RESET_FORM';
 export const CLEAR_ERROR = 'form/CLEAR_ERROR';
 
 export const PASSWORD_CHANGE_FORM = 'PASSWORD_CHANGE_FORM';
+export const EDIT_PROFILE_FORM = 'EDIT_PROFILE_FORM';
 
 const initialState = {
   PASSWORD_CHANGE_FORM: {
@@ -17,6 +19,18 @@ const initialState = {
       oldPassword: '',
       newPassword: '',
       confirmPassword: '',
+    },
+    status: {
+      loading: false,
+      submited: false,
+    },
+    error: ''
+  },
+  EDIT_PROFILE_FORM: {
+    data: {
+      fullname: '',
+      email: '',
+      cakeDay: '',
     },
     status: {
       loading: false,
@@ -73,6 +87,14 @@ export const updateFormProperty = (formName, fieldName, value) => ({
   }
 })
 
+export const loadDataToForm = (formName, data) => ({
+  type: LOAD_DATA_TO_FORM,
+  payload: {
+    formName,
+    data,
+  }
+})
+
 const formReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORM_PROPERTY: {
@@ -88,6 +110,19 @@ const formReducer = (state = initialState, action) => {
             ...properties,
             [fieldName]: value,
           }
+        }
+      }
+    }
+    case LOAD_DATA_TO_FORM: {
+      const { payload } = action;
+      const { formName, data } = payload;
+      const form = state[formName]
+      return {
+        ...state,
+        [formName]: {
+          ...form,
+          data:
+            data,
         }
       }
     }

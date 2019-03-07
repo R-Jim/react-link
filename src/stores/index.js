@@ -12,7 +12,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const persistConfig = {
   key: 'root',
   storage,
-  // blacklist: ['register', 'login', 'account', 'passwordChangeModal']
+  // blacklist: ['register', 'login', 'account', 'form']
   blacklist: ['register', 'login', 'form']
 };
 
