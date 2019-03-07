@@ -12,9 +12,6 @@ export const PASSWORD_CHANGE_FORM = 'PASSWORD_CHANGE_FORM';
 export const EDIT_PROFILE_FORM = 'EDIT_PROFILE_FORM';
 
 const initialState = {
-  resources: {
-
-  },
   PASSWORD_CHANGE_FORM: {
     properties: {
       isOpen: false,
@@ -101,14 +98,6 @@ export const loadDataToForm = (formName, data) => ({
   }
 })
 
-export const loadResourcesToForm = (resourceName, resourceValue) => ({
-  type: LOAD_RESOURCES_TO_FORM,
-  payload: {
-    resourceName,
-    resourceValue,
-  }
-})
-
 const formReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORM_PROPERTY: {
@@ -136,16 +125,6 @@ const formReducer = (state = initialState, action) => {
         [formName]: {
           ...form,
           data,
-        }
-      }
-    }
-    case LOAD_RESOURCES_TO_FORM: {
-      const { payload } = action;
-      const { resourceName, resourceValue } = payload;
-      return {
-        ...state,
-        resources: {
-          [resourceName]: resourceValue
         }
       }
     }
