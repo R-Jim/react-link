@@ -3,14 +3,15 @@ import Profile from '../../components/Profile';
 import { selectCurrentAccount } from '../../reducers/Account';
 import {
   submitForm, loadDataToForm,
-  EDIT_PROFILE_FORM, selectForm, selectResources,
+  EDIT_PROFILE_FORM, selectForm,
   updateFormValue,
 } from '../../reducers/form';
+import { selectResource } from '../../reducers/resource';
 
 const mapStateToProps = (state) => {
   const account = selectCurrentAccount(state);
   const form = selectForm(state, EDIT_PROFILE_FORM);
-  const { countries } = selectResources(state);
+  const { countries } = selectResource(state);
   return {
     account,
     form,
