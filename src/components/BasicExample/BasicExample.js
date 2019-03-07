@@ -4,7 +4,7 @@ import Home from '../../containers/Home';
 import Login from '../../containers/Login';
 import Register from '../../containers/Register';
 import Account from '../../containers/Account';
-import Profile from '../Profile';
+import Profile from '../../containers/Profile';
 import Pokemon from '../Pokemon';
 import UserRoute from '../UserRoute';
 import AdminRoute from '../AdminRoute';

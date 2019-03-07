@@ -2,14 +2,15 @@ export const UNAUTHORIZED = 0;
 export const ADMIN = 1;
 export const USER = 2;
 
-const LOAD_ACCOUNT = "account/LOAD_ACCOUNT";
+const LOAD_ACCOUNT = 'account/LOAD_ACCOUNT';
 const CHANGE_PASSWORD = 'account/CHANGE_PASSWORD';
-const REGISTER_ACCOUNT = "account/REGISTER_ACCOUNT";
-const UPDATE_FORM_VALUE = "account/UPDATE_FORM_VALUE";
+const REGISTER_ACCOUNT = 'account/REGISTER_ACCOUNT';
+const UPDATE_FORM_VALUE = 'account/UPDATE_FORM_VALUE';
+const ACCOUNT_PROFILE_UPDATE = 'account/ACCOUNT_PROFILE_UPDATE';
 
 const initialState = {
   accounts: [
-    { username: 'user', password: 'user', email: 'user@gmail.com', accountType: USER },
+    { username: 'user', password: 'user', fullname: 'user a user', email: 'user@gmail.com', cakeDay: '2019-03-22', accountType: USER },
     { username: 'admin', password: 'admin', email: 'admin@gmail.com', accountType: ADMIN }
   ],
   currentAccount: {
@@ -78,6 +79,11 @@ export const selectAccountList = (state) => {
   return account.accounts;
 }
 
+export const accountProfileUpdate = (account) => ({
+  type: ACCOUNT_PROFILE_UPDATE,
+  payload: account,
+})
+
 const accountReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORM_VALUE: {
@@ -108,6 +114,18 @@ const accountReducer = (state = initialState, action) => {
       return {
         ...state,
         currentAccount,
+      }
+    }
+    case ACCOUNT_PROFILE_UPDATE: {
+      const { payload } = action;
+      const editedAccount = { ...currentAccount, ...payload };
+      const { currentAccount, accounts } = state;
+      const index = accounts.findIndex(x => x.username === currentAccount.username);
+      accounts[index] = editedAccount;
+      return {
+        ...state,
+        currentAccount: editedAccount,
+        accounts,
       }
     }
     default: return state;
