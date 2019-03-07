@@ -20,7 +20,6 @@ export class BasicExample extends Component {
   render() {
     const { account } = this.props;
     const { accountType } = account;
-    console.log(this.props);
     return (
       <Router>
         <Switch>

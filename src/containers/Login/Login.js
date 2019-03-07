@@ -1,16 +1,17 @@
 import { connect } from 'react-redux';
 import Login from '../../components/Login';
-import * as loginReducer from '../../reducers/Login';
+import {
+  login, updateFormValue,
+  selectError, selectLoggedIn, selectLoginStatus, selectPassword, selectUsername
+} from '../../reducers/Login';
 
 const mapStateToProps = (state) => ({
-  username: loginReducer.selectUsername(state),
-  password: loginReducer.selectPassword(state),
-  loggedIn: loginReducer.selectLoggedIn(state),
-  isLogging: loginReducer.selectLoginStatus(state),
-  error: loginReducer.selectError(state),
+  username: selectUsername(state),
+  password: selectPassword(state),
+  loggedIn: selectLoggedIn(state),
+  isLogging: selectLoginStatus(state),
+  error: selectError(state),
 })
-
-const { login, updateFormValue } = loginReducer;
 
 const mapDispatchToProps = {
   updateFormValue,

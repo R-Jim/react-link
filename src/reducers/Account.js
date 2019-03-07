@@ -3,13 +3,14 @@ export const ADMIN = 1;
 export const USER = 2;
 
 const LOAD_ACCOUNT = "account/LOAD_ACCOUNT";
+const CHANGE_PASSWORD = 'account/CHANGE_PASSWORD';
 const REGISTER_ACCOUNT = "account/REGISTER_ACCOUNT";
 const UPDATE_FORM_VALUE = "account/UPDATE_FORM_VALUE";
 
 const initialState = {
   accounts: [
-    { username: 'user', password: 'user', accountType: USER },
-    { username: 'admin', password: 'admin', accountType: ADMIN }
+    { username: 'user', password: 'user', email: 'user@gmail.com', accountType: USER },
+    { username: 'admin', password: 'admin', email: 'admin@gmail.com', accountType: ADMIN }
   ],
   currentAccount: {
     username: 'testing',
@@ -51,6 +52,16 @@ export const loadAccount = (username) => {
   }
 }
 
+export const changePassword = (username, newPassword) => {
+  return {
+    type: CHANGE_PASSWORD,
+    payload: {
+      username,
+      newPassword,
+    }
+  }
+}
+
 export const checkExistUsername = ({ account }, username) => {
   return account.accounts.some((acc) => acc.username === username);
 }
@@ -85,6 +96,15 @@ const accountReducer = (state = initialState, action) => {
     case LOAD_ACCOUNT: {
       const { username } = action.payload;
       const currentAccount = state.accounts.find(acc => acc.username === username);
+      return {
+        ...state,
+        currentAccount,
+      }
+    }
+    case CHANGE_PASSWORD: {
+      const { username, newPassword } = action.payload;
+      const currentAccount = state.accounts.find(acc => acc.username === username);
+      currentAccount.password = newPassword;
       return {
         ...state,
         currentAccount,
