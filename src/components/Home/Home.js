@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   HomeContentWrapper,
   LeftPanel, CenterPanel, RightPanel,
@@ -42,14 +41,19 @@ class Home extends React.Component {
     })
   }
 
+  handleRedirectButton = (url) => {
+    const { history } = this.props;
+    history.push(url);
+  }
+
   render() {
     return (
       <HomeContentWrapper>
         <LeftPanel>
           <Avatar />
-          <ButtonStyled><Link to="/account">Account</Link></ButtonStyled>
-          <ButtonStyled><Link to="/profile">Profile</Link></ButtonStyled>
-          <ButtonStyled><Link to="/setting">Setting</Link></ButtonStyled>
+          <ButtonStyled onClick={() => this.handleRedirectButton('/account')}>Account</ButtonStyled>
+          <ButtonStyled onClick={() => this.handleRedirectButton('/profile')}>Profile</ButtonStyled>
+          <ButtonStyled onClick={() => this.handleRedirectButton('/setting')}>Setting</ButtonStyled>
         </LeftPanel>
         <CenterPanel>
           <MainScreen />
