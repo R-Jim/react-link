@@ -6,27 +6,17 @@ import {
 } from './styles';
 import { Title, InputStyled } from '../styles';
 import { EDIT_PROFILE_FORM } from '../../reducers/form';
-import { getCountryList } from '../../commons/api';
+import { getCountryListSaga } from '../../sagas/resource';
 import Select from 'react-select';
 import avatar from '../../icons/facebook.png';
 
 export class Profile extends Component {
   constructor(props) {
     super(props);
-    getCountryList().then(res => {
-      this.handleLoadAllCounttry(res.data);
-    });
     this.state = {
       isEditing: false,
-      countries: [],
       selectedOption: null,
     }
-  }
-
-  handleLoadAllCounttry = (countries) => {
-    this.setState({
-      countries: countries.map((country) => { return { value: country.name, label: country.name } })
-    })
   }
 
   handleInputFullname = (e) => {
@@ -77,11 +67,9 @@ export class Profile extends Component {
 
   handleEditClick = () => {
     const { loadDataToForm, account } = this.props;
-    const { countries } = this.state;
     loadDataToForm(EDIT_PROFILE_FORM, account);
     this.setState({
       isEditing: true,
-      selectedOption: countries.find((country) => country.value === account.country)
     })
   }
 
@@ -99,8 +87,8 @@ export class Profile extends Component {
   }
 
   render() {
-    const { account, form } = this.props;
-    const { isEditing, countries, selectedOption } = this.state;
+    const { account, form, countries } = this.props;
+    const { isEditing, selectedOption } = this.state;
     const data = (isEditing) ? form.data : account;
     return (
       <ProfileWrapper>
@@ -122,7 +110,7 @@ export class Profile extends Component {
           <Title>Country:</Title>
           {(isEditing) ?
             <Select
-              value={selectedOption}
+              value={{ value: data.country, label: data.country }}
               onChange={this.hanleInputCountry}
               options={countries}
             />

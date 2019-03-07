@@ -6,11 +6,15 @@ const LOAD_DATA_TO_FORM = 'form/LOAD_DATA_TO_FORM';
 const UPDATE_FORM_VALUE = 'form/UPDATE_FORM_VALUE';
 const RESET_FORM = 'form/RESET_FORM';
 export const CLEAR_ERROR = 'form/CLEAR_ERROR';
+export const LOAD_RESOURCES_TO_FORM = 'form/LOAD_RESOURCES_TO_FORM';
 
 export const PASSWORD_CHANGE_FORM = 'PASSWORD_CHANGE_FORM';
 export const EDIT_PROFILE_FORM = 'EDIT_PROFILE_FORM';
 
 const initialState = {
+  resources: {
+
+  },
   PASSWORD_CHANGE_FORM: {
     properties: {
       isOpen: false,
@@ -60,7 +64,9 @@ export const formSubmitFail = (formName, error) => ({
   }
 })
 
-export const selectForm = ({ form }, formName) => form[formName]
+export const selectForm = ({ form }, formName) => form[formName];
+
+export const selectResources = ({ form }) => form.resources;
 
 export const updateFormValue = (formName, fieldName, value) => ({
   type: UPDATE_FORM_VALUE,
@@ -95,6 +101,14 @@ export const loadDataToForm = (formName, data) => ({
   }
 })
 
+export const loadResourcesToForm = (resourceName, resourceValue) => ({
+  type: LOAD_RESOURCES_TO_FORM,
+  payload: {
+    resourceName,
+    resourceValue,
+  }
+})
+
 const formReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_FORM_PROPERTY: {
@@ -121,8 +135,17 @@ const formReducer = (state = initialState, action) => {
         ...state,
         [formName]: {
           ...form,
-          data:
-            data,
+          data,
+        }
+      }
+    }
+    case LOAD_RESOURCES_TO_FORM: {
+      const { payload } = action;
+      const { resourceName, resourceValue } = payload;
+      return {
+        ...state,
+        resources: {
+          [resourceName]: resourceValue
         }
       }
     }
@@ -198,4 +221,3 @@ const formReducer = (state = initialState, action) => {
 }
 
 export default formReducer;
-
