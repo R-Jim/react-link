@@ -109,11 +109,13 @@ const accountReducer = (state = initialState, action) => {
     }
     case CHANGE_PASSWORD: {
       const { username, newPassword } = action.payload;
-      const currentAccount = state.accounts.find(acc => acc.username === username);
-      currentAccount.password = newPassword;
+      const { accounts } = state;
+      const index = accounts.findIndex(x => x.username === username);
+      accounts[index].password = newPassword;
       return {
         ...state,
-        currentAccount,
+        currentAccount: accounts[index],
+        accounts,
       }
     }
     case ACCOUNT_PROFILE_UPDATE: {
