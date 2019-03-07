@@ -2,40 +2,40 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import { Title, InputStyled, ButtonStyled } from '../styles';
 import { ModalStyled } from './styles';
-import { FORM_NAME } from '../../containers/PasswordChangeModal/PasswordChangeModal';
+import { PASSWORD_CHANGE_FORM } from '../../reducers/form';
 
 export class PasswordChangeModal extends Component {
 
   handleInputOldPassword = (e) => {
     const { updateFormValue } = this.props;
     const value = e.target.value;
-    updateFormValue(FORM_NAME, 'oldPassword', value);
+    updateFormValue(PASSWORD_CHANGE_FORM, 'oldPassword', value);
   }
 
   handleInputNewPassword = (e) => {
     const { updateFormValue } = this.props;
     const value = e.target.value;
-    updateFormValue(FORM_NAME, 'newPassword', value);
+    updateFormValue(PASSWORD_CHANGE_FORM, 'newPassword', value);
   }
 
   handleInputConfirmNewPassword = (e) => {
     const { updateFormValue } = this.props;
     const value = e.target.value;
-    updateFormValue(FORM_NAME, 'confirmPassword', value);
+    updateFormValue(PASSWORD_CHANGE_FORM, 'confirmPassword', value);
   }
 
   submitForm = (e) => {
     const { submitForm } = this.props;
     // clearError();
-    submitForm(FORM_NAME);
+    submitForm(PASSWORD_CHANGE_FORM);
     e.preventDefault();
   }
 
   render() {
-    const { isOpen, toggleModal, oldPassword, newPassword, confirmPassword,
+    const { isOpen, updateFormProperty, oldPassword, newPassword, confirmPassword,
       error, } = this.props;
     return (
-      <Modal isOpen={isOpen} onRequestClose={() => toggleModal(FORM_NAME, false)} style={ModalStyled}>
+      <Modal isOpen={isOpen} onRequestClose={() => updateFormProperty(PASSWORD_CHANGE_FORM, 'isOpen', false)} style={ModalStyled}>
         <h1>Change password</h1>
         <Title style={{ "color": "red" }}>{error}</Title>
         <form onSubmit={this.submitForm}>

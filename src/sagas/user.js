@@ -1,13 +1,12 @@
 import { take, select, all, put } from 'redux-saga/effects';
 import { selectCurrentAccount, changePassword } from '../reducers/Account';
-import { FORM_SUBMIT_START, selectForm, resetForm, formSubmitFail, formSubmitSuccess } from '../reducers/form';
-import { FORM_NAME } from '../containers/PasswordChangeModal/PasswordChangeModal';
+import { FORM_SUBMIT_START, selectForm, resetForm, formSubmitFail, formSubmitSuccess, PASSWORD_CHANGE_FORM } from '../reducers/form';
 
 export function* passwordChangeSaga() {
   while (1) {
     const action = yield take(FORM_SUBMIT_START);
     const formName = action.payload;
-    if (formName !== FORM_NAME) {
+    if (formName !== PASSWORD_CHANGE_FORM) {
       return;
     }
     const form = yield select(selectForm, formName);
@@ -15,7 +14,9 @@ export function* passwordChangeSaga() {
     const account = yield select(selectCurrentAccount);
     if (newPassword !== confirmPassword) {
       yield put(formSubmitFail(formName, 'Confirm password not match'));
-    } else if (account.password === oldPassword) {
+      continue;
+    }
+    if (account.password === oldPassword) {
       yield put(formSubmitSuccess());
       yield put(changePassword(account.username, newPassword));
       yield put(resetForm(formName));

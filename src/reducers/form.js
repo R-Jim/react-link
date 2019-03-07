@@ -1,13 +1,15 @@
 export const FORM_SUBMIT_START = 'form/FORM_SUBMIT_START';
 export const FORM_SUBMIT_SUCCESS = 'form/FORM_SUBMIT_SUCCESS';
 export const FORM_SUBMIT_FAIL = 'form/FORM_SUBMIT_FAIL';
-export const TOGGLE_MODAL = 'form/TOGGLE_MODAL';
+export const UPDATE_FORM_PROPERTY = 'form/UPDATE_FORM_PROPERTY';
 const UPDATE_FORM_VALUE = 'form/UPDATE_FORM_VALUE';
 const RESET_FORM = 'form/RESET_FORM';
 export const CLEAR_ERROR = 'form/CLEAR_ERROR';
 
+export const PASSWORD_CHANGE_FORM = 'PASSWORD_CHANGE_FORM';
+
 const initialState = {
-  passwordChangeModalForm: {
+  PASSWORD_CHANGE_FORM: {
     properties: {
       isOpen: false,
     },
@@ -62,26 +64,29 @@ export const resetForm = (formName) => ({
   }
 })
 
-export const toggleModal = (formName, isOpen) => ({
-  type: TOGGLE_MODAL,
+export const updateFormProperty = (formName, fieldName, value) => ({
+  type: UPDATE_FORM_PROPERTY,
   payload: {
     formName,
-    isOpen,
+    fieldName,
+    value,
   }
 })
 
 const formReducer = (state = initialState, action) => {
   switch (action.type) {
-    case TOGGLE_MODAL: {
+    case UPDATE_FORM_PROPERTY: {
       const { payload } = action;
-      const { formName, isOpen } = payload;
-      const form = state[formName];
+      const { formName, fieldName, value } = payload;
+      const form = state[formName]
+      const { properties } = form;
       return {
         ...state,
         [formName]: {
           ...form,
           properties: {
-            isOpen
+            ...properties,
+            [fieldName]: value,
           }
         }
       }

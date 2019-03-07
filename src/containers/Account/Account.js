@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { selectCurrentAccount } from '../../reducers/Account';
-import { toggleModal } from '../../reducers/form';
+import { updateFormProperty } from '../../reducers/form';
 import Account from '../../components/Account';
 
 const mapStateToProps = (state) => ({
@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  toggleModal,
+  updateFormProperty,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

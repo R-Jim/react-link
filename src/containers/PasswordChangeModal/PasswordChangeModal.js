@@ -1,11 +1,9 @@
 import { connect } from 'react-redux';
 import PasswordChangeModal from '../../components/PasswordChangeModal';
-import { selectForm, updateFormValue, submitForm, toggleModal } from '../../reducers/form';
-
-export const FORM_NAME = 'passwordChangeModalForm';
+import { selectForm, updateFormValue, submitForm, updateFormProperty, PASSWORD_CHANGE_FORM } from '../../reducers/form';
 
 const mapStateToProps = (state) => {
-  const { properties, data, error } = selectForm(state, FORM_NAME);
+  const { properties, data, error } = selectForm(state, PASSWORD_CHANGE_FORM);
   const { isOpen } = properties;
   const { oldPassword, newPassword, confirmPassword } = data;
   return {
@@ -20,7 +18,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   updateFormValue,
   submitForm,
-  toggleModal,
+  updateFormProperty,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PasswordChangeModal);

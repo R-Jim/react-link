@@ -5,11 +5,11 @@ import FBIcon from '../../icons/facebook.png';
 import GGIcon from '../../icons/google+.png';
 import TTIcon from '../../icons/twitter.png';
 import PasswordChangeModal from '../../containers/PasswordChangeModal';
-import { FORM_NAME } from '../../containers/PasswordChangeModal/PasswordChangeModal';
+import { PASSWORD_CHANGE_FORM } from '../../reducers/form';
 
 class Account extends React.Component {
   render() {
-    const { account, toggleModal } = this.props;
+    const { account, updateFormProperty } = this.props;
     return (
       <AccountWrapper>
         <h1>Account info</h1>
@@ -19,7 +19,7 @@ class Account extends React.Component {
         <Title>
           Email: {account.email}
         </Title>
-        <ButtonStyled onClick={() => toggleModal(FORM_NAME, true)}>
+        <ButtonStyled onClick={() => updateFormProperty(PASSWORD_CHANGE_FORM, 'isOpen', true)}>
           New password
         </ButtonStyled>
         <SocialIconImg src={FBIcon} />
