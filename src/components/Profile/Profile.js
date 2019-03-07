@@ -1,18 +1,32 @@
 import React, { Component } from 'react';
 import {
   ProfileTitleValue, ProfileWrapper,
-  RowStyled,
+  ProfileAvatar,
   ProfileButtonStyled,
 } from './styles';
 import { Title, InputStyled } from '../styles';
 import { EDIT_PROFILE_FORM } from '../../reducers/form';
+import { getCountryList } from '../../commons/api';
+import Select from 'react-select';
+import avatar from '../../icons/facebook.png';
 
 export class Profile extends Component {
   constructor(props) {
     super(props);
+    getCountryList().then(res => {
+      this.handleLoadAllCounttry(res.data);
+    });
     this.state = {
-      isEditing: false
+      isEditing: false,
+      countries: [],
+      selectedOption: null,
     }
+  }
+
+  handleLoadAllCounttry = (countries) => {
+    this.setState({
+      countries: countries.map((country) => { return { value: country.name, label: country.name } })
+    })
   }
 
   handleInputFullname = (e) => {
@@ -20,12 +34,40 @@ export class Profile extends Component {
     const value = e.target.value;
     updateFormValue(EDIT_PROFILE_FORM, 'fullname', value);
   }
+  handleInputDob = (e) => {
+    const { updateFormValue } = this.props;
+    const value = e.target.value;
+    updateFormValue(EDIT_PROFILE_FORM, 'dob', value);
+  }
+  handleInputAddress = (e) => {
+    const { updateFormValue } = this.props;
+    const value = e.target.value;
+    updateFormValue(EDIT_PROFILE_FORM, 'address', value);
+  }
+  handleInputEmail = (e) => {
+    const { updateFormValue } = this.props;
+    const value = e.target.value;
+    updateFormValue(EDIT_PROFILE_FORM, 'email', value);
+  }
+  handleInputPhone = (e) => {
+    const { updateFormValue } = this.props;
+    const value = e.target.value;
+    updateFormValue(EDIT_PROFILE_FORM, 'phone', value);
+  }
 
-  handleRenderFieldValue = (value, updateFormValue) => {
+  hanleInputCountry = (selectedOption) => {
+    const { updateFormValue } = this.props;
+    updateFormValue(EDIT_PROFILE_FORM, 'country', selectedOption.value);
+    this.setState({
+      selectedOption
+    })
+  }
+
+  handleRenderFieldValue = (value, updateFormValue, type, isRequire, regex) => {
     const { isEditing } = this.state;
     if (isEditing) {
       return (
-        <InputStyled value={value} onChange={updateFormValue} />
+        <InputStyled type={type} value={value} onChange={updateFormValue} required={isRequire} pattern={regex} />
       )
     }
     return (
@@ -35,9 +77,11 @@ export class Profile extends Component {
 
   handleEditClick = () => {
     const { loadDataToForm, account } = this.props;
+    const { countries } = this.state;
     loadDataToForm(EDIT_PROFILE_FORM, account);
     this.setState({
-      isEditing: true
+      isEditing: true,
+      selectedOption: countries.find((country) => country.value === account.country)
     })
   }
 
@@ -56,26 +100,34 @@ export class Profile extends Component {
 
   render() {
     const { account, form } = this.props;
-    const { isEditing } = this.state;
+    const { isEditing, countries, selectedOption } = this.state;
     const data = (isEditing) ? form.data : account;
     return (
       <ProfileWrapper>
         <form onSubmit={this.handleSubmitForm}>
           <Title>Avatar</Title>
+          <ProfileAvatar src={avatar} />
           <Title>Full name:</Title>
-          {this.handleRenderFieldValue(data.fullname, this.handleInputFullname)}
+          {this.handleRenderFieldValue(data.fullname, this.handleInputFullname, 'text', true)}
           <Title>Date of birth:</Title>
-          <ProfileTitleValue>{data.dob}</ProfileTitleValue>
+          {this.handleRenderFieldValue(data.dob, this.handleInputDob, 'date')}
           <Title>Cake day:</Title>
           <ProfileTitleValue>{data.cakeDay}</ProfileTitleValue>
           <Title>Address:</Title>
-          <ProfileTitleValue>{data.address}</ProfileTitleValue>
+          {this.handleRenderFieldValue(data.address, this.handleInputAddress, 'text')}
           <Title>Phone No.:</Title>
-          <ProfileTitleValue>{data.phone}</ProfileTitleValue>
+          {this.handleRenderFieldValue(data.phone, this.handleInputPhone, 'text', false, '\\d{8,}')}
           <Title>Email:</Title>
-          <ProfileTitleValue>{data.email}</ProfileTitleValue>
+          {this.handleRenderFieldValue(data.email, this.handleInputEmail, 'email', true)}
           <Title>Country:</Title>
-          <ProfileTitleValue>{data.email}</ProfileTitleValue>
+          {(isEditing) ?
+            <Select
+              value={selectedOption}
+              onChange={this.hanleInputCountry}
+              options={countries}
+            />
+            : <ProfileTitleValue>{data.country}</ProfileTitleValue>
+          }
           {(isEditing) ?
             <div>
               <ProfileButtonStyled type='submit'>Save</ProfileButtonStyled>

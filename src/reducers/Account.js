@@ -10,7 +10,7 @@ const ACCOUNT_PROFILE_UPDATE = 'account/ACCOUNT_PROFILE_UPDATE';
 
 const initialState = {
   accounts: [
-    { username: 'user', password: 'user', fullname: 'user a user', email: 'user@gmail.com', cakeDay: '24/11/1997', accountType: USER },
+    { username: 'user', password: 'user', fullname: 'user a user', email: 'user@gmail.com', cakeDay: '2019-03-22', accountType: USER },
     { username: 'admin', password: 'admin', email: 'admin@gmail.com', accountType: ADMIN }
   ],
   currentAccount: {
@@ -117,12 +117,15 @@ const accountReducer = (state = initialState, action) => {
       }
     }
     case ACCOUNT_PROFILE_UPDATE: {
-      const { username, fullname } = action.payload;
-      const currentAccount = state.accounts.find(acc => acc.username === username);
-      currentAccount.fullname = fullname;
+      const { payload } = action;
+      const editedAccount = { ...currentAccount, ...payload };
+      const { currentAccount, accounts } = state;
+      const index = accounts.findIndex(x => x.username === currentAccount.username);
+      accounts[index] = editedAccount;
       return {
         ...state,
-        currentAccount,
+        currentAccount: editedAccount,
+        accounts,
       }
     }
     default: return state;

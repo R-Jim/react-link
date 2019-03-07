@@ -25,3 +25,8 @@ export const ProfileTitleValue = styled(Title)`
   font-size:1.2em;
   min-height:1.2em;
 `;
+
+export const ProfileAvatar = styled.img`
+  width:100px;
+  height:100px;
+`;
